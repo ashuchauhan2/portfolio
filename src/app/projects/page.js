@@ -16,11 +16,19 @@ export default function Projects() {
       title: "Image to Text Tool",
       description: "A simple program that allows users to select an image and get raw text from the image using OCR technology",
       image: "/image2text.png",
-      github: "https://github.com/ashuchauhan2/imagetotext/tree/main",
+      github: "https://github.com/ashuchauhan2/imagetotext",
       demo: "https://www.youtube.com/watch?v=CSoQYXdu0hI",
       technologies: ["Python", "OCR", "Kivy"]
     },
-    // Add more projects here
+    {
+      title: "Discord Stock Bot",
+      description: "A bot I created for Discord which displays the current price of a stock",
+      image: "/stock.png",
+      github: "https://github.com/ashuchauhan2/stockBot",
+      demo: "", //add demo vid
+      technologies: ["Python", "Discord API", "Web Scraping"]
+    },
+    // add more as I build more!
   ]
 
   return (
