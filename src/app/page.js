@@ -38,7 +38,7 @@ export default function Home() {
                   <ArrowRight className="w-5 h-5" />
                 </Link>
                 <Link 
-                  href="/resume.pdf"
+                  href="/Resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 px-6 py-3 rounded-lg text-white font-medium transition-colors border border-zinc-700"
