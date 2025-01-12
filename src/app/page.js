@@ -28,6 +28,16 @@ export default function Home() {
                 Welcome to my site! I&apos;m a student passionate about technology, eager to embrace roles that challenge me to grow and provide opportunities to learn and contribute.
               </p>
 
+              <h1 className="text-5xl md:text-4xl font-bold text-white">
+                  Currently Working On:
+                </h1>
+              <p className="text-lg text-zinc-400 leading-relaxed">
+                <Link href="https://github.com/Avipatel1107/COSC4P02" target="_blank" rel="noopener noreferrer" className="text-white hover:text-zinc-400">
+                  Course Mix
+                </Link>
+                <p>An application that allows students to create an optimized schedule for their courses at Brock University factoring in course pre-requisites and constraints, as well as course difficulties and failure rates.</p>
+              </p>
+
               {/* CTA Buttons */}
               <div className="flex flex-wrap gap-4">
                 <Link 
