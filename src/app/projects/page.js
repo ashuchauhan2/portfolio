@@ -5,6 +5,14 @@ import Navigation from '@/components/Navigation'
 export default function Projects() {
   const projects = [
     {
+      title: "Gastimator",
+      description: "Developed a basic web app that allows users to estimate the fuel costs for a trip based on the distance, fuel efficiency, and fuel price.",
+      image: "/gastimator.png",
+      github: "https://github.com/ashuchauhan2/Gastimator",
+      demo: "https://gastimator.vercel.app/", //insert yt link for priv video here
+      technologies: ["TypeScript", "Next.js", "TailwindCSS", "Shadcn", "Google Maps API"]
+    },
+    {
       title: "Cryptanalysis Genetic Algorithm",
       description: "Developed a genetic algorithm to decrypt text using the Vigenere cipher.",
       image: "/ga.png",
