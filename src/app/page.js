@@ -32,10 +32,10 @@ export default function Home() {
                   Currently Working On:
                 </h1>
               <p className="text-lg text-zinc-400 leading-relaxed">
-                <Link href="https://github.com/Avipatel1107/COSC4P02" target="_blank" rel="noopener noreferrer" className="text-white hover:text-zinc-400">
+                <Link href="https://www.coursemix.ca" target="_blank" rel="noopener noreferrer" className="text-white hover:text-zinc-400">
                   Course Mix
                 </Link>
-                <p>An application that allows students to create an optimized schedule for their courses at Brock University factoring in course pre-requisites and constraints, as well as course difficulties and failure rates.</p>
+                <p>An alternative to the Brock University course planner, allowing students to create an optimized schedule for their courses at Brock University factoring in course pre-requisites and constraints, as well as providing a way to view discussions on enrolled courses and progress towards your degree.</p>
               </p>
 
               {/* CTA Buttons */}
