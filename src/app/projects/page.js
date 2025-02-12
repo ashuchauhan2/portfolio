@@ -5,6 +5,14 @@ import Navigation from '@/components/Navigation'
 export default function Projects() {
   const projects = [
     {
+      title: "CourseMix",
+      description: "Developed a basic web app that allows users to estimate the fuel costs for a trip based on the distance, fuel efficiency, and fuel price.",
+      image: "/coursemix.jpeg",
+      github: "https://github.com/Avipatel1107/COSC4P02/tree/main",
+      demo: "https://coursemix.ca",
+      technologies: ["JavaScript", "Python", "Next.js", "TailwindCSS", "Shadcn", "Supabase", "Resend", "Vercel"]
+    },
+    {
       title: "Gastimator",
       description: "Developed a basic web app that allows users to estimate the fuel costs for a trip based on the distance, fuel efficiency, and fuel price.",
       image: "/gastimator.png",
