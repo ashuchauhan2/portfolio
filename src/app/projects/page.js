@@ -8,7 +8,7 @@ export default function Projects() {
       title: "CourseMix",
       description: "Developed a basic web app that allows users to estimate the fuel costs for a trip based on the distance, fuel efficiency, and fuel price.",
       image: "/coursemix.jpeg",
-      github: "https://github.com/Avipatel1107/COSC4P02/tree/main",
+      github: "https://github.com/ashuchauhan2/coursemix",
       demo: "https://coursemix.ca",
       technologies: ["JavaScript", "Python", "Next.js", "TailwindCSS", "Shadcn", "Supabase", "Resend", "Vercel"]
     },
@@ -41,7 +41,6 @@ export default function Projects() {
       description: "A bot I created for Discord which displays the current price of a stock",
       image: "/stock.png",
       github: "https://github.com/ashuchauhan2/stockBot",
-      demo: "", //add demo vid
       technologies: ["Python", "Discord API", "Web Scraping"]
     },
     // add more as I build more!
