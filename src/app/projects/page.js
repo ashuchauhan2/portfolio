@@ -41,6 +41,7 @@ export default function Projects() {
       description: "A bot I created for Discord which displays the current price of a stock",
       image: "/stock.png",
       github: "https://github.com/ashuchauhan2/stockBot",
+      demo: "",
       technologies: ["Python", "Discord API", "Web Scraping"]
     },
     // add more as I build more!
