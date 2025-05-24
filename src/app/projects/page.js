@@ -5,6 +5,14 @@ import Navigation from '@/components/Navigation'
 export default function Projects() {
   const projects = [
     {
+      title: "Consistify",
+      description: "A mobile app which allows users to bring consistency to their daily life",
+      image: "/consistify.png",
+      github: "https://github.com/ashuchauhan2/consistify",
+      demo: "", //add yt link after I make the video lol
+      technologies: ["Flutter", "Firebase"]
+    },
+    {
       title: "CourseMix",
       description: "Developed a basic web app that allows users to estimate the fuel costs for a trip based on the distance, fuel efficiency, and fuel price.",
       image: "/coursemix.jpeg",

@@ -32,10 +32,12 @@ export default function Home() {
                   Currently Working On:
                 </h1>
               <p className="text-lg text-zinc-400 leading-relaxed">
-                <Link href="https://www.coursemix.ca" target="_blank" rel="noopener noreferrer" className="text-white hover:text-zinc-400">
-                  Course Mix
-                </Link>
-                <p>An alternative to the Brock University course planner, allowing students to create an optimized schedule for their courses at Brock University factoring in course pre-requisites and constraints, as well as providing a way to view discussions on enrolled courses and progress towards your degree.</p>
+                {/* <Link href="make this yt video when i make it" target="_blank" rel="noopener noreferrer" className="text-white hover:text-zinc-400"> */}
+                  <h2 className="text-2xl font-bold text-white">Consistify</h2>
+                  <br></br>
+                {/* </Link> */}
+                <p>A mobile app which allows users to bring consistency to their daily life through daily tracking, and friendly competition with friends and communities!</p>
+                <p>Currently in development</p>
               </p>
 
               {/* CTA Buttons */}
