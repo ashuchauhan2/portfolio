@@ -6,7 +6,7 @@ export default function Projects() {
   const projects = [
     {
       title: "Golf Handicap Calculator",
-      description: "A web app which allows users to bring consistency to their daily life",
+      description: "Full stack web app built with Spring Boot and React that allows users to calculate their golf handicap",
       image: "/golfhandicap.jpg",
       github: "https://github.com/ashuchauhan2/golfhandicap",
       demo: "", //add yt link after I make the video lol
