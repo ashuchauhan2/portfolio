@@ -5,12 +5,28 @@ import Navigation from '@/components/Navigation'
 export default function Projects() {
   const projects = [
     {
+      title: "Golf Handicap Calculator",
+      description: "A web app which allows users to bring consistency to their daily life",
+      image: "/golfhandicap.jpg",
+      github: "https://github.com/ashuchauhan2/golfhandicap",
+      demo: "", //add yt link after I make the video lol
+      technologies: ["Spring Boot", "Java", "React"]
+    },
+    {
       title: "Consistify",
       description: "A mobile app which allows users to bring consistency to their daily life",
       image: "/consistify.png",
       github: "https://github.com/ashuchauhan2/consistify",
       demo: "", //add yt link after I make the video lol
       technologies: ["Flutter", "Firebase"]
+    },
+    {
+      title: "GN Packages",
+      description: "A Java Swing application which assists staff with checking in golfers.",
+      image: "/gnpackages.png",
+      github: "https://github.com/ashuchauhan2/gnpackages",
+      demo: "", //add yt link
+      technologies: ["Java", "Swing"]
     },
     {
       title: "CourseMix",
@@ -25,7 +41,7 @@ export default function Projects() {
       description: "Developed a basic web app that allows users to estimate the fuel costs for a trip based on the distance, fuel efficiency, and fuel price.",
       image: "/gastimator.png",
       github: "https://github.com/ashuchauhan2/Gastimator",
-      demo: "https://gastimator.vercel.app/", //insert yt link for priv video here
+      demo: "https://gastimator.vercel.app/", 
       technologies: ["TypeScript", "Next.js", "TailwindCSS", "Shadcn", "Google Maps API"]
     },
     {
@@ -33,7 +49,7 @@ export default function Projects() {
       description: "Developed a genetic algorithm to decrypt text using the Vigenere cipher.",
       image: "/ga.png",
       github: "https://github.com/ashuchauhan2/GeneticAlgorithm",
-      demo: "https://www.youtube.com/watch?v=FAj27jRUXQQ", //insert yt link for priv video here
+      demo: "https://www.youtube.com/watch?v=FAj27jRUXQQ",
       technologies: ["Java"]
     },
     {
