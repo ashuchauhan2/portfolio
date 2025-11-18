@@ -57,7 +57,7 @@ export default function HomeHeader({
               AC
             </span>
             <span className="text-lg font-semibold tracking-tight text-white">
-              AshuTube
+              Ashu Chauhan
             </span>
           </Link>
         </div>
