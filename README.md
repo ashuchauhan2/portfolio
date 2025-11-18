@@ -1,3 +1,3 @@
-# Portfolio Website
+# Portfolio Site
 
-A modern portfolio website for myself to show off my projects, provide updates on projects I am working on and other stuff as I see fit!
+Created a YouTube themed portfolio site to show case my skills, projects, work experiences, and more.
