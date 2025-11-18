@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo } from 'react'
+import { Suspense, useMemo } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import ReelsScreen from '@/components/home/ExperienceReelScreen'
 import { homeSections } from '@/data/homeContent'
@@ -8,6 +8,14 @@ import { homeSections } from '@/data/homeContent'
 const DEFAULT_CATEGORY = 'experience'
 
 export default function ReelsPage() {
+  return (
+    <Suspense fallback={<ReelsFallback />}>
+      <ReelsPageContent />
+    </Suspense>
+  )
+}
+
+function ReelsPageContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const category = searchParams.get('category') ?? DEFAULT_CATEGORY
@@ -59,4 +67,10 @@ export default function ReelsPage() {
   )
 }
 
-
+function ReelsFallback() {
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-black text-white">
+      <p className="text-sm text-zinc-400">Loading reels…</p>
+    </div>
+  )
+}
