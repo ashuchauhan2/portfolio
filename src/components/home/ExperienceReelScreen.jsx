@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { motion, AnimatePresence } from 'framer-motion'
 import {
   ArrowLeft,
   ArrowUpRight,
@@ -69,6 +70,7 @@ export default function ExperienceReelScreen({
 
   const [currentIndex, setCurrentIndex] = useState(clampedInitial ?? 0)
   const [isPaused, setIsPaused] = useState(false)
+  const [direction, setDirection] = useState(0)
   const lastScrollRef = useRef(0)
   const containerRef = useRef(null)
 
@@ -83,6 +85,7 @@ export default function ExperienceReelScreen({
     if (!items || items.length === 0 || currentIndex >= items.length - 1) {
       return
     }
+    setDirection(1)
     setCurrentIndex((prev) => prev + 1)
   }, [currentIndex, items])
 
@@ -90,6 +93,7 @@ export default function ExperienceReelScreen({
     if (!items || items.length === 0 || currentIndex <= 0) {
       return
     }
+    setDirection(-1)
     setCurrentIndex((prev) => prev - 1)
   }, [currentIndex, items])
 
@@ -145,12 +149,17 @@ export default function ExperienceReelScreen({
       className="flex min-h-screen flex-col overflow-hidden bg-gradient-to-b from-black via-zinc-950 to-black text-white"
       onWheel={handleWheel}
     >
-      <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between bg-black/40 backdrop-blur-sm px-6 py-4">
+      <motion.header
+        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between bg-black/40 backdrop-blur-sm px-6 py-4"
+        initial={{ y: -60, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.4, delay: 0.2 }}
+      >
         <div className="flex items-center gap-4">
           <button
             type="button"
             onClick={onExit}
-            className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 p-2 hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
+            className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 p-2 hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 transition"
           >
             <ArrowLeft className="h-5 w-5" />
           </button>
@@ -163,42 +172,52 @@ export default function ExperienceReelScreen({
           <button
             type="button"
             onClick={() => setIsPaused((value) => !value)}
-            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
+            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 transition"
           >
             {isPaused ? <Play className="h-4 w-4" /> : <Pause className="h-4 w-4" />}
             {isPaused ? 'Resume' : 'Pause'}
           </button>
           <Link
-            href="/contact"
-            className="inline-flex items-center justify-center rounded-full bg-white px-4 py-2 text-sm font-medium text-zinc-950 hover:bg-zinc-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
+            href="/content/connect-with-me"
+            className="inline-flex items-center justify-center rounded-full bg-white px-4 py-2 text-sm font-medium text-zinc-950 hover:bg-zinc-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 transition"
           >
             Connect
           </Link>
         </div>
-      </header>
+      </motion.header>
 
       <main
         ref={containerRef}
         className="relative h-screen w-full"
-        style={{
-          transform: `translateY(-${currentIndex * 100}vh)`,
-          transition: 'transform 0.5s cubic-bezier(0.65, 0, 0.35, 1)',
-        }}
       >
-        {items.map((item, index) => (
-          <ReelCard
-            key={item.id}
-            item={item}
-            index={index}
-            totalCount={items.length}
-            heading={heading}
-            isActive={index === currentIndex}
-          />
-        ))}
+        <AnimatePresence mode="popLayout" custom={direction}>
+          <motion.div
+            key={currentIndex}
+            custom={direction}
+            initial={{ y: direction >= 0 ? '100%' : '-100%', opacity: 0.5 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: direction >= 0 ? '-100%' : '100%', opacity: 0.5 }}
+            transition={{
+              type: 'spring',
+              stiffness: 200,
+              damping: 30,
+              mass: 1,
+            }}
+            className="absolute inset-0"
+          >
+            <ReelCard
+              item={items[currentIndex]}
+              index={currentIndex}
+              totalCount={items.length}
+              heading={heading}
+              isActive
+            />
+          </motion.div>
+        </AnimatePresence>
       </main>
 
       <div className="fixed inset-y-1/2 right-6 z-40 hidden -translate-y-1/2 flex-col items-center gap-4 md:flex">
-        <button
+        <motion.button
           type="button"
           onClick={goPrevious}
           disabled={currentIndex === 0}
@@ -206,10 +225,12 @@ export default function ExperienceReelScreen({
             'flex h-12 w-12 items-center justify-center rounded-full bg-white/15 text-white transition',
             currentIndex > 0 ? 'hover:bg-white/25' : 'opacity-30 cursor-not-allowed',
           ].join(' ')}
+          whileHover={currentIndex > 0 ? { scale: 1.1 } : undefined}
+          whileTap={currentIndex > 0 ? { scale: 0.9 } : undefined}
         >
           <ChevronUp className="h-6 w-6" />
-        </button>
-        <button
+        </motion.button>
+        <motion.button
           type="button"
           onClick={goNext}
           disabled={currentIndex === items.length - 1}
@@ -219,9 +240,11 @@ export default function ExperienceReelScreen({
               ? 'hover:bg-white/25'
               : 'opacity-30 cursor-not-allowed',
           ].join(' ')}
+          whileHover={currentIndex < items.length - 1 ? { scale: 1.1 } : undefined}
+          whileTap={currentIndex < items.length - 1 ? { scale: 0.9 } : undefined}
         >
           <ChevronDown className="h-6 w-6" />
-        </button>
+        </motion.button>
       </div>
     </div>
   )
@@ -267,7 +290,12 @@ function ReelCard({ item, index, totalCount, heading, isActive }) {
 
   return (
     <section className="relative flex h-screen w-full flex-col items-center justify-center px-4 pb-14 pt-20">
-      <div className="relative flex w-full max-w-[420px] flex-col items-center gap-6">
+      <motion.div
+        className="relative flex w-full max-w-[420px] flex-col items-center gap-6"
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+      >
         <div className="relative aspect-[9/16] w-full overflow-hidden rounded-[36px] shadow-[0_50px_140px_rgba(0,0,0,0.55)]">
           {renderThumbnail(item.thumbnail)}
           {channel ? (
@@ -289,12 +317,22 @@ function ReelCard({ item, index, totalCount, heading, isActive }) {
                   {item.location ? <span>{item.location}</span> : null}
                 </div>
                 <h1 className="mt-3 text-xl font-semibold text-white">{item.title}</h1>
-                <SlideContent item={item} slide={currentSlide} />
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentSlide?.id}
+                    initial={{ opacity: 0, x: 10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -10 }}
+                    transition={{ duration: 0.25 }}
+                  >
+                    <SlideContent item={item} slide={currentSlide} />
+                  </motion.div>
+                </AnimatePresence>
                 {slides.length > 1 ? (
                   <div className="mt-4 flex items-center justify-between">
                     <button
                       type="button"
-                      onClick={() => setCurrentSlideIndex((index) => Math.max(index - 1, 0))}
+                      onClick={() => setCurrentSlideIndex((i) => Math.max(i - 1, 0))}
                       disabled={!hasPreviousSlide}
                       className={[
                         'flex h-9 w-9 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white transition',
@@ -305,26 +343,32 @@ function ReelCard({ item, index, totalCount, heading, isActive }) {
                       <ChevronLeft className="h-4 w-4" />
                     </button>
                     <div className="flex items-center gap-2">
-                      {slides.map((slide, index) => {
-                        const isActive = index === currentSlideIndex
+                      {slides.map((slide, i) => {
+                        const active = i === currentSlideIndex
                         return (
                           <button
                             key={slide.id}
                             type="button"
-                            onClick={() => setCurrentSlideIndex(index)}
-                            className={[
-                              'h-2 rounded-full bg-white/25 transition',
-                              isActive ? 'w-8 bg-white' : 'w-3 hover:bg-white/60',
-                            ].join(' ')}
+                            onClick={() => setCurrentSlideIndex(i)}
+                            className="relative h-2 rounded-full bg-white/25 transition overflow-hidden"
+                            style={{ width: active ? 32 : 12 }}
                             aria-label={`Go to ${slide.label}`}
-                          />
+                          >
+                            {active ? (
+                              <motion.span
+                                layoutId="slideIndicator"
+                                className="absolute inset-0 rounded-full bg-white"
+                                transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                              />
+                            ) : null}
+                          </button>
                         )
                       })}
                     </div>
                     <button
                       type="button"
                       onClick={() =>
-                        setCurrentSlideIndex((index) => Math.min(index + 1, slides.length - 1))
+                        setCurrentSlideIndex((i) => Math.min(i + 1, slides.length - 1))
                       }
                       disabled={!hasNextSlide}
                       className={[
@@ -346,7 +390,7 @@ function ReelCard({ item, index, totalCount, heading, isActive }) {
             </span>
           ) : null}
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }
@@ -414,7 +458,7 @@ function ChannelButton({ channel, className = '' }) {
   }
 
   const baseClasses = [
-    'inline-flex items-center gap-1.5 rounded-full border border-white/25 bg-black/60 px-4 py-1 text-[10px] font-semibold uppercase tracking-[0.3em] text-white/90',
+    'inline-flex items-center gap-1.5 rounded-full border border-white/25 bg-black/60 px-4 py-1 text-[10px] font-semibold uppercase tracking-[0.3em] text-white/90 transition hover:bg-black/80',
     className,
   ]
     .filter(Boolean)
@@ -450,4 +494,3 @@ function ChannelButton({ channel, className = '' }) {
     </Link>
   )
 }
-

@@ -1,6 +1,7 @@
 "use client"
 
 import { Home, PlaySquare, BriefcaseBusiness } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 const navItems = [
   { id: 'all', label: 'Home', icon: Home },
@@ -16,27 +17,37 @@ export default function HomeBottomNav({ activeFilterId, onSelect }) {
           const isActive = id === activeFilterId
 
           return (
-            <button
+            <motion.button
               key={id}
               type="button"
               onClick={() => onSelect?.(id)}
               className="flex flex-col items-center gap-1 py-3 w-full text-xs font-medium text-zinc-300"
+              whileTap={{ scale: 0.9 }}
             >
-              <span
-                className={[
-                  'flex h-9 w-9 items-center justify-center rounded-full transition',
-                  isActive ? 'bg-white text-zinc-950' : 'bg-zinc-900 text-zinc-400',
-                ].join(' ')}
-              >
-                <Icon className="h-5 w-5" />
+              <span className="relative flex h-9 w-9 items-center justify-center rounded-full">
+                {isActive ? (
+                  <motion.span
+                    layoutId="bottomNavActive"
+                    className="absolute inset-0 rounded-full bg-white"
+                    transition={{
+                      type: 'spring',
+                      stiffness: 400,
+                      damping: 30,
+                    }}
+                  />
+                ) : (
+                  <span className="absolute inset-0 rounded-full bg-zinc-900" />
+                )}
+                <Icon className={[
+                  'relative z-10 h-5 w-5 transition',
+                  isActive ? 'text-zinc-950' : 'text-zinc-400',
+                ].join(' ')} />
               </span>
               <span className={isActive ? 'text-white' : undefined}>{label}</span>
-            </button>
+            </motion.button>
           )
         })}
       </div>
     </nav>
   )
 }
-
-

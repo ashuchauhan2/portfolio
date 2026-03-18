@@ -3,7 +3,7 @@
 import { Suspense, useMemo } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import ReelsScreen from '@/components/home/ExperienceReelScreen'
-import { homeSections } from '@/data/homeContent'
+import { getSectionById } from '@/data/contentQueries'
 
 const DEFAULT_CATEGORY = 'experience'
 
@@ -25,7 +25,7 @@ function ReelsPageContent() {
   )
 
   const section = useMemo(
-    () => homeSections.find((item) => item.id === category),
+    () => getSectionById(category),
     [category],
   )
 

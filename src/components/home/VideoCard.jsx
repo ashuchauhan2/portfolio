@@ -2,7 +2,28 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { EllipsisVertical } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { Play, EllipsisVertical } from 'lucide-react'
+
+function hashCode(str) {
+  let hash = 0
+  for (let i = 0; i < str.length; i++) {
+    hash = ((hash << 5) - hash + str.charCodeAt(i)) | 0
+  }
+  return Math.abs(hash)
+}
+
+function fakeViews(title) {
+  const h = hashCode(title || 'item')
+  const base = (h % 90) + 10
+  if (base > 80) return `${(base / 10).toFixed(1)}K views`
+  return `${base * 10} views`
+}
+
+function fakeProgress(title) {
+  const h = hashCode(title || 'item')
+  return 30 + (h % 50)
+}
 
 export default function VideoCard({ item, variant = 'grid', href, onSelect }) {
   const isReel = variant === 'reels'
@@ -18,10 +39,29 @@ export default function VideoCard({ item, variant = 'grid', href, onSelect }) {
         ].join(' ')}
       >
         {renderThumbnail(item?.thumbnail)}
+
+        {!isReel ? (
+          <div className="absolute inset-0 flex items-center justify-center bg-black/0 opacity-0 transition-all duration-300 group-hover:bg-black/30 group-hover:opacity-100">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/90 shadow-lg">
+              <Play className="h-5 w-5 fill-zinc-900 text-zinc-900 ml-0.5" />
+            </div>
+          </div>
+        ) : null}
+
+        <div className="absolute bottom-0 left-0 h-[3px] bg-red-600 transition-all duration-500"
+          style={{ width: `${fakeProgress(item?.title)}%` }}
+        />
+
         {item?.badge ? (
           <span className="absolute bottom-2 right-2 rounded-md bg-black/70 px-2 py-1 text-xs font-semibold text-white">
             {item.badge}
           </span>
+        ) : null}
+
+        {isReel ? (
+          <div className="absolute left-2 top-2 shimmer-bar rounded-md bg-red-600/90 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
+            Short
+          </div>
         ) : null}
       </div>
 
@@ -60,6 +100,11 @@ export default function VideoCard({ item, variant = 'grid', href, onSelect }) {
               title={item.meta}
             >
               {item.meta}
+              {!isReel ? (
+                <span className="ml-1 text-zinc-600">
+                  · {fakeViews(item?.title)}
+                </span>
+              ) : null}
             </p>
           ) : null}
           {item?.description && !isReel ? (
@@ -82,45 +127,64 @@ export default function VideoCard({ item, variant = 'grid', href, onSelect }) {
     isReel ? 'w-[160px] sm:w-[180px] md:w-[210px] flex-shrink-0' : '',
   ].join(' ')
 
+  const motionProps = {
+    whileHover: isReel
+      ? { y: -4, transition: { duration: 0.2 } }
+      : { scale: 1.02, transition: { duration: 0.2 } },
+  }
+
   if (onSelect) {
     return (
-      <button
+      <motion.button
         type="button"
         onClick={onSelect}
         className={[
           'block w-full rounded-2xl text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500',
           isReel ? 'flex-shrink-0' : '',
         ].join(' ')}
+        {...motionProps}
       >
         <article className={wrapperClass}>{cardContent}</article>
-      </button>
+      </motion.button>
     )
   }
 
   if (!interactive) {
-    return <article className={wrapperClass}>{cardContent}</article>
+    return (
+      <motion.article className={wrapperClass} {...motionProps}>
+        {cardContent}
+      </motion.article>
+    )
   }
 
-  const Wrapper = linkHref ? Link : 'button'
-  const wrapperProps = linkHref
-    ? {
-        href: linkHref,
-      }
-    : {
-        type: 'button',
-        onClick: onSelect,
-      }
+  if (linkHref) {
+    return (
+      <motion.div {...motionProps}>
+        <Link
+          href={linkHref}
+          className={[
+            'block focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded-2xl',
+            isReel ? 'flex-shrink-0' : '',
+          ].join(' ')}
+        >
+          <article className={wrapperClass}>{cardContent}</article>
+        </Link>
+      </motion.div>
+    )
+  }
 
   return (
-    <Wrapper
-      {...wrapperProps}
+    <motion.button
+      type="button"
+      onClick={onSelect}
       className={[
         'block focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded-2xl',
         isReel ? 'flex-shrink-0' : '',
       ].join(' ')}
+      {...motionProps}
     >
       <article className={wrapperClass}>{cardContent}</article>
-    </Wrapper>
+    </motion.button>
   )
 }
 
@@ -130,9 +194,8 @@ function renderThumbnail(thumbnail) {
   }
 
   if (thumbnail.type === 'image' && thumbnail.src) {
-    // Check if it's an SVG (likely a skill icon)
     const isSvg = thumbnail.src.endsWith('.svg')
-    
+
     return (
       <Image
         src={thumbnail.src}
@@ -140,7 +203,7 @@ function renderThumbnail(thumbnail) {
         fill
         priority={false}
         sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
-        className={isSvg 
+        className={isSvg
           ? "object-contain p-8 transition duration-300 group-hover:scale-105"
           : "object-cover transition duration-300 group-hover:scale-[1.02]"
         }
@@ -181,5 +244,3 @@ function initialsFromTitle(title) {
 
   return `${words[0][0]}${words[1][0]}`.toUpperCase()
 }
-
-
