@@ -78,7 +78,11 @@ export default function ExperienceReelScreen({
     if (clampedInitial === null) {
       return
     }
-    setCurrentIndex(clampedInitial)
+    const syncIndex = setTimeout(() => {
+      setCurrentIndex(clampedInitial)
+    }, 0)
+
+    return () => clearTimeout(syncIndex)
   }, [clampedInitial])
 
   const goNext = useCallback(() => {
@@ -210,7 +214,6 @@ export default function ExperienceReelScreen({
               index={currentIndex}
               totalCount={items.length}
               heading={heading}
-              isActive
             />
           </motion.div>
         </AnimatePresence>
@@ -250,14 +253,8 @@ export default function ExperienceReelScreen({
   )
 }
 
-function ReelCard({ item, index, totalCount, heading, isActive }) {
+function ReelCard({ item, index, totalCount, heading }) {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
-
-  useEffect(() => {
-    if (isActive) {
-      setCurrentSlideIndex(0)
-    }
-  }, [isActive])
 
   const slides = useMemo(() => {
     if (!item) {

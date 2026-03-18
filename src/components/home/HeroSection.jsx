@@ -41,9 +41,11 @@ export default function HeroSection({ onScrollToFeed }) {
     }
 
     if (isDeleting && displayText === '') {
-      setIsDeleting(false)
-      setTaglineIndex((prev) => (prev + 1) % taglines.length)
-      return
+      const reset = setTimeout(() => {
+        setIsDeleting(false)
+        setTaglineIndex((prev) => (prev + 1) % taglines.length)
+      }, 0)
+      return () => clearTimeout(reset)
     }
 
     const speed = isDeleting ? 30 : 60
