@@ -7,6 +7,40 @@ export const experienceSection = {
     variant: 'reels',
     items: [
       {
+        id: 'coursemix-swe',
+        title: 'CourseMix · Software Engineer (Backend)',
+        description:
+          'Freelance backend engineer on an academic planning platform for university students.',
+        meta: 'Jan 2025 - Apr 2025',
+        location: 'Remote',
+        highlights: [
+          'Engineered a dynamic graduation projection engine that processes real-time academic data to calculate degree completion trajectories, handling complex logic for varying major requirements and prerequisites.',
+          'Collaborated within a cross-functional Agile team, participating in bi-weekly sprints and daily stand-ups to ensure the iterative delivery of high-priority backend features.',
+          'Integrated the Open-Meteo REST API to architect a real-time weather microservice, implementing error-handling and data transformation layers to serve localized campus climate data.',
+          'Developed scalable backend logic to provide personalized academic suggestions, improving user engagement through the implementation of efficient filtering and sorting algorithms.',
+        ],
+        learnings: [
+          'Building production-grade backend services in a remote Agile environment.',
+          'Designing data transformation layers and REST API integrations.',
+          'Working around data limitations and finding creative workarounds.',
+          'Database management, data entry, and data analysis.',
+        ],
+        accent: 'from-sky-500 to-blue-600',
+        thumbnail: {
+          type: 'image',
+          src: '/coursemix.jpeg',
+          alt: 'CourseMix academic planning platform',
+        },
+        filters: ['experience'],
+        profiles: ['full-stack'],
+        cta: '/experience',
+        channel: {
+          label: 'Code',
+          type: 'code',
+          href: 'https://github.com/Avipatel1107/COSC4P02/tree/main/coursemix',
+        },
+      },
+      {
         id: 'grand-niagara-team-lead',
         title: 'Grand Niagara GC',
         description:

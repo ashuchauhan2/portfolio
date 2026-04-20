@@ -40,29 +40,12 @@ export const spotlightSection = {
         cta: '/content/connect-with-me',
       },
       {
-        id: 'aws-cloud-practitioner-cert',
-        title: 'Certified Cloud Practitioner',
-        description:
-          'Currently pursuing foundational AWS certification to strengthen cloud infrastructure knowledge and best practices.',
-        meta: 'Certification · In Progress',
-        badge: 'Work in Progress',
-        accent: 'from-orange-500 to-amber-400',
-        thumbnail: {
-          type: 'image',
-          src: '/aws.png',
-          alt: 'AWS Certified Cloud Practitioner',
-        },
-        filters: ['education'],
-        profiles: ['full-stack'],
-        cta: '/content/aws-cloud-practitioner-cert',
-      },
-      {
         id: 'resume',
         title: 'Resume',
         description:
           'Complete overview of my education, work experience, technical skills, and key projects.',
         meta: 'Document · PDF',
-        badge: 'Updated 2025',
+        badge: 'Updated 2026',
         accent: 'from-blue-600 to-indigo-600',
         thumbnail: {
           type: 'image',
@@ -72,6 +55,23 @@ export const spotlightSection = {
         filters: ['education'],
         profiles: ['full-stack', 'mobile', 'community'],
         cta: '/content/resume',
+      },
+      {
+        id: 'work-authorization',
+        title: 'Work Authorization',
+        description:
+          'Canadian citizen with work eligibility through TN Visa pathways for the USA and Youth Mobility Visa programs across multiple countries.',
+        meta: 'Work Status · Internationally Eligible',
+        badge: 'Open to Relocation',
+        accent: 'from-violet-600 to-purple-600',
+        thumbnail: {
+          type: 'image',
+          src: '/workvisa.jpg',
+          alt: 'Work authorization details',
+        },
+        filters: ['contact'],
+        profiles: ['full-stack', 'community'],
+        cta: '/content/work-authorization',
       },
     ],
   }

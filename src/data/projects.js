@@ -7,6 +7,34 @@ export const projectsSection = {
     variant: 'reels',
     items: [
       {
+        id: 'Gymrocks',
+        title: 'Gymrocks',
+        description:
+          'iOS app that helps you track your gym workouts and progress.',
+        meta: 'Project · Swift · App Store',
+        highlights: [
+          'Developed a iOS app that helps you track your gym workouts and progress.',
+          'Allows users to setup routines and forget the rest so they can focus on the gym.',
+          'Handles weight progression and manages rest periods between sets so users purely on working out.'
+        ],
+        learnings: [
+          'Approval process for the app store, and Apple Developer Program',
+          'Marketing and promotion are just as important as the app itself',
+        ],
+        thumbnail: {
+          type: 'image',
+          src: '/gymrocks.jpg',
+          alt: 'Gymrocks app',
+        },
+        filters: ['projects'],
+        profiles: ['full-stack', 'mobile'],
+        channel: {
+          label: 'Code',
+          type: 'code',
+          href: 'https://apps.apple.com/ca/app/gymrocks/id6762212492',
+        },
+      },
+      {
         id: 'astro-autotapper',
         title: 'Astro AutoTapper',
         description:
@@ -63,65 +91,6 @@ export const projectsSection = {
           label: 'Code',
           type: 'code',
           href: 'https://www.youtube.com/shorts/nvrotY2moCE',
-        },
-      },
-      {
-        id: 'gn-packages',
-        title: 'GN Packages · Pro Shop Utility',
-        description:
-          'Java Swing desktop app to automate membership lookups.',
-        meta: 'Project · Java · Swing',
-        highlights: [
-          'Replaced manual spreadsheets with an indexed membership catalog and search shortcuts.',
-          'Cut manual lookup time from 20 seconds/person to 5 seconds/person',
-          'Reduced 100% of manual data entry errors.',
-        ],
-        learnings: [
-          'How to build simple apps that have a real-world impact',
-          'Managing a simple CSV database and not overengineering the solution',
-          'Building a desktop app with Java Swing',
-        ],
-        thumbnail: {
-          type: 'image',
-          src: '/gnpackages.png',
-          alt: 'GN Packages desktop app',
-        },
-        filters: ['projects'],
-        profiles: ['full-stack'],
-        channel: {
-          label: 'Code',
-          type: 'code',
-          href: 'https://github.com/ashuchauhan2/gnpackages',
-        },
-      },
-      {
-        id: 'coursemix',
-        title: 'CourseMix · Academic Planner',
-        description:
-          'Academic planning tool for Brock University students.',
-        meta: 'Project · Next.js · Supabase',
-        highlights: [
-          'Helps students map out their degree progression and visualize their progress',
-          'Provides personalized course recommendations based on prerequisite requirements and academic history',
-        ],
-        learnings: [
-          'How to build a full-stack application from scratch.',
-          'Working around data limitations and finding creative workarounds.',
-          'Working in an agile development environment and collaborating with a team.',
-          'Database management, data entry, and data analysis.',
-          'Theorized ML data pipelines to create a smarter course suggestions system.',
-        ],
-        thumbnail: {
-          type: 'image',
-          src: '/coursemix.jpeg',
-          alt: 'CourseMix planning interface',
-        },
-        filters: ['projects'],
-        profiles: ['full-stack'],
-        channel: {
-          label: 'Live Demo',
-          type: 'live',
-          href: 'https://coursemix.ca',
         },
       },
       {
