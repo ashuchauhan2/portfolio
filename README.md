@@ -1,3 +1,3 @@
-# Portfolio Site
+# Ashu Chauhan — Portfolio
 
-Created a YouTube themed portfolio site to show case my skills, projects, work experiences, and more.
+My personal portfolio website. Has my current resume accessible, and discusses my career and goals etc.
